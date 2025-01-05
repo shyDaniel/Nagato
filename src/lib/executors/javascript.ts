@@ -1,14 +1,10 @@
-// src/lib/executors/javascript.ts
-import * as Babel from '@babel/standalone';
-
-export async function executeJavaScript(code: string): Promise<any> {
+export async function executeJavaScript(code: string): Promise<string> {
     try {
-        const transformed = Babel.transform(code, {
-            presets: ['env'],
-        }).code;
-
-        return new Function(transformed as string)();
+        // For MVP, we're using eval. In production, you'd want to use a proper sandbox
+        // like vm2 or isolated-vm
+        const result = eval(code);
+        return String(result);
     } catch (error) {
-        throw new Error(`Execution error: ${error}`);
+        return `Error: ${error.message}`;
     }
 }

@@ -1,11 +1,11 @@
-export interface LearningStep {
+export interface Step {
     title: string;
     description: string;
-    code: string;
     language: string;
+    code: string;
 }
 
 export interface LearningPlan {
     title: string;
-    steps: LearningStep[];
+    steps: Step[];
 }
